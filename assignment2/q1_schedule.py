@@ -1,3 +1,4 @@
+import random
 import numpy as np
 from utils.test_env import EnvTest
 
@@ -34,7 +35,10 @@ class LinearSchedule(object):
         ##############################################################
         ################ YOUR CODE HERE - 3-4 lines ################## 
 
-        pass
+        if t > self.nsteps:
+            t = self.nsteps
+        p = t / self.nsteps
+        self.epsilon = p * self.eps_end + (1 - p) * self.eps_begin
 
         ##############################################################
         ######################## END YOUR CODE ############## ########
@@ -79,7 +83,10 @@ class LinearExploration(LinearSchedule):
         ##############################################################
         ################ YOUR CODE HERE - 4-5 lines ##################
 
-        pass
+        should_explore = random.random() < self.epsilon
+        if not should_explore:
+            return best_action
+        return self.env.action_space.sample()
 
         ##############################################################
         ######################## END YOUR CODE #######################
