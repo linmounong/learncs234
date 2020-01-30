@@ -3,4 +3,5 @@ gym
 matplotlib
 numpy
 six
-tensorflow==1.15
+tensorflow>=1.15
+mujoco-py==0.5.7
